@@ -11,14 +11,9 @@
   </head>
 
   <body>
-    {% block content %} {% endblock %}
-
+    {% include 'video_collection/navbar.html' %}
     <hr />
-
-    <div class="navigation">
-      <a href="{% url 'home' %}">Home</a>
-      <a href="{% url 'video_list' %}">Video List</a>
-      <a href="{% url 'add_video' %}">Add a Video</a>
-    </div>
+    <!-- all child template -->
+    {% block content %} {% endblock %}
   </body>
 </html>

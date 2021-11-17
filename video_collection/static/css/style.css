@@ -1,15 +1,17 @@
 body {
-    background-color: lightblue;
-    font-size: large;
+  /* background-color: lightblue; */
+  font-size: large;
 }
 
 .navigation {
-    margin: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 1rem;
+  padding: 1rem;
 }
 
 .navigation > a {
-    color: darkgreen;
-    padding-right: 30px;
+  color: rgb(255, 255, 255);
+  padding-right: 30px;
 }
-
-

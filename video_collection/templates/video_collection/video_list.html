@@ -18,7 +18,7 @@
 {% for video in videos %}
 
 <div>
-  <h3>{{ video.name }}</h3>
+  <h3><a href="{{ video.url }}" target="_blank">{{ video.name }}</a></h3>
   <p>{{ video.notes }}</p>
   <iframe
     width="420"
