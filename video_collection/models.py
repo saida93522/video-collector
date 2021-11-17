@@ -18,7 +18,7 @@ class Video(models.Model):
 
             if url_components.scheme != 'https':
                 raise ValidationError(f'Not a YouTube URL {self.url}')
-
+            # netloc--where the request is made to.
             if url_components.netloc != 'www.youtube.com':
                 raise ValidationError(f'Not a YouTube URL {self.url}')
                 
