@@ -34,7 +34,10 @@ def add(request):
     new_video_form = VideoForm()
     context = {'new_video_form':new_video_form}
     return render(request, 'video_collection/add.html', context) 
-    
+
+#TODO add delete button
+def delete(request):
+    pass    
 
 def video_list(request):
     """ Displays the list of videos user saved/added
