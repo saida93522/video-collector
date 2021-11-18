@@ -119,8 +119,6 @@ class TestVideoList(TestCase):
         #Assert
         self.assertContains(response, '2 videos')
     
-
-    
 class TestVideoSearch(TestCase):
     """ test the video search shows the matching videos or returns no videos """
     def test_video_search_that_match(self):

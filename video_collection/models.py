@@ -1,9 +1,12 @@
 from urllib import parse 
 from django.db import models
 from django.core.exceptions import ValidationError
+from django.contrib.auth.models import User
+from django.core.files.storage import default_storage
 
 class Video(models.Model):
     """ video model fields maps to video table in db. """
+    user = models.ForeignKey(User, null=False, on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
     url = models.CharField(max_length=400)
     notes = models.TextField(blank=True, null=True)
@@ -37,6 +40,7 @@ class Video(models.Model):
             raise ValidationError(f'Unable to parse URL {self.url}') from e
 
         super().save(*args, **kwargs)  
+
 
    
                     
