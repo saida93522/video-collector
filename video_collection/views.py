@@ -39,8 +39,7 @@ def delete(request,video_pk):
     """ delete the video data of the current user(pk). 
         :param: request object for a place that was visited."""
     video = Video.objects.get(pk=video_pk) 
-    # get_object_or_404(Video, pk=video_pk)
-    
+
     if request.method == 'POST':
         video.delete()
         return redirect('video_list')
@@ -49,14 +48,12 @@ def delete(request,video_pk):
 
 
 def video_details(request,video_pk):
-    # if request.method
     video = get_object_or_404(Video, pk=video_pk)
-    # page_err = HttpResponse.status_code(404)
+
     if HttpResponse.status_code == 404:
         messages.error(request,'page not found')
     return render(request,'video_collection/video_details.html',{'video':video})
-    #  HttpResponseNotFound:
-    #     messages.error('Video does not exist')
+
     
 def video_list(request):
     """ displays the list of videos user saved/added

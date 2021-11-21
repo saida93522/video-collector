@@ -3,8 +3,23 @@
   margin: 0;
   font-family: "Poppins";
 }
-
 body {
-  background-color: #000;
-  font-size: large;
+  width: 100vw;
+}
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 1rem;
+  padding: 4rem;
+}
+.nav > a {
+  color: rgb(141, 174, 141);
+}
+
+.delete {
+  margin-left: 1rem;
+}
+.delete:hover {
+  background-color: red;
 }

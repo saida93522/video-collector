@@ -177,12 +177,6 @@ class TestVideoModel(TestCase):
         for invalid_url in invalid_video_urls:
             with self.assertRaises(ValidationError):
                 Video.objects.create(name='ABC',url=invalid_url,notes='example notes')
-            #     new_video = {
-            #     'name':'example',
-            #     'url':invalid_urls,
-            #     'notes':'example note'
-            # }
-                
         video_count = Video.objects.count()
         self.assertEqual(0, video_count)
     
@@ -193,12 +187,48 @@ class TestVideoModel(TestCase):
         with self.assertRaises(IntegrityError):
             Video.objects.create(name='ABC',url='https://www.youtube.com/watch?v=0XoT1z-gAQw',notes='example notes1')
 
-# class TestDeleteVideo(TestCase):
-#     pass
-
+class TestDeleteVideo(TestCase):
+    def test_video_deleted(self):
+        #Arrange
+        v2 = {
+            'name':'Mexico',
+            'url':'https://www.youtube.com/watch?v=0XoT1z-gAQw',
+            'notes':'10 Best Places to Visit in Mexico'
+        }
+        Video.objects.create(**v2)
+        #Act
+        
+        Video.objects.get(id=1)
+        url = reverse('delete_video',kwargs={'video_pk':1})
+        response = self.client.post(url,follow=True)
+        
+        #Assert
+        self.assertEqual(response.status_code, 200)
+        self.assertRedirects(response,'/video_list')
+    
 class TestDetailVideo(TestCase):
     def test_a_detail_page_is_returned(self):
-        Video.objects.create(name='LMN',url='https://www.youtube.com/watch?v=bAEprBbAfZM',notes='example notes1')
-        url = reverse('video_details')
-        # response = self.client.get(url)
-    
+        #Arrange
+        v2 = {
+            'name':'Mexico',
+            'url':'https://www.youtube.com/watch?v=0XoT1z-gAQw',
+            'notes':'10 Best Places to Visit in Mexico'
+        }
+        Video.objects.create(**v2)
+        #Act
+        video_1 = Video.objects.get(id=1)
+        url = reverse('video_details',kwargs={'video_pk':1})
+        response = self.client.get(url)
+        #Assert
+        self.assertEqual(200,response.status_code)
+        self.assertTemplateUsed(response, 'video_collection/video_details.html')
+
+        #TODO test expected data is returned
+        expected_data = response.context['video']
+        self.assertEqual(expected_data,video_1)
+
+        self.assertContains(response, 'Mexico')
+        self.assertContains(response, 'https://www.youtube.com/watch?v=0XoT1z-gAQw')
+        self.assertContains(response, '10 Best Places to Visit in Mexico')
+
+   

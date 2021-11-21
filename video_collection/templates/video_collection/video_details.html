@@ -1,12 +1,5 @@
 {% extends 'video_collection/base.html' %} {% load static %} {% block content %}
-<style>
-  .delete {
-    margin-left: 1rem;
-  }
-  .delete:hover {
-    background-color: red;
-  }
-</style>
+
 <h3><a href="{{ video.url }}" target="_blank">{{ video.name }}</a></h3>
 <p>{{ video.notes }}</p>
 <iframe
