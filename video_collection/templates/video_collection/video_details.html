@@ -1,5 +1,12 @@
 {% extends 'video_collection/base.html' %} {% load static %} {% block content %}
-
+<style>
+  .delete {
+    margin-left: 1rem;
+  }
+  .delete:hover {
+    background-color: red;
+  }
+</style>
 <h3><a href="{{ video.url }}" target="_blank">{{ video.name }}</a></h3>
 <p>{{ video.notes }}</p>
 <iframe
@@ -12,6 +19,9 @@
 </p>
 <form action="{% url 'delete_video' video.pk %}" method="POST">
   {% csrf_token %}
+  <!--using the request object meta-data(information sent with the req). 
+    redirects to the previous page if alert is cancel -->
+  <a href="{{ request.META.HTTP_REFERER }}">Go Back</a>
   <button type="submit" class="delete">Delete</button>
 </form>
 <script src="{% static 'js/delete_btn.js' %}"></script>
